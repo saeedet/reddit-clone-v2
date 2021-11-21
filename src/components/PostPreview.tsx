@@ -76,6 +76,7 @@ export default function PostPreview({ post }: Props): ReactElement {
     }
 
     getImageFromStorage();
+    console.log(post.votes.items);
   }, []);
 
   const addVote = async (voteType: string) => {
@@ -133,8 +134,8 @@ export default function PostPreview({ post }: Props): ReactElement {
   };
 
   console.log(post);
-  console.log("Upvotes:", upvotes);
-  console.log("Downvotes:", downvotes);
+  //   console.log("Upvotes:", upvotes);
+  //   console.log("Downvotes:", downvotes);
 
   return (
     <Paper elevation={3}>
