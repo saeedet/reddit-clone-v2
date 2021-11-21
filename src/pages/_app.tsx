@@ -8,6 +8,7 @@ import Amplify from "aws-amplify";
 
 import awsconfig from "../aws-exports";
 import AuthContext from "../context/AuthContext";
+import Header from "../components/Header";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -33,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
+          <Header />
           <Component {...pageProps} />
         </ThemeProvider>
       </AuthContext>

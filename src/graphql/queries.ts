@@ -7,6 +7,8 @@ export const getPost = /* GraphQL */ `
     getPost(id: $id) {
       id
       title
+      contents
+      image
       createdAt
       updatedAt
       owner
@@ -15,6 +17,17 @@ export const getPost = /* GraphQL */ `
           id
           postID
           content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      votes {
+        items {
+          id
+          vote
+          postID
           createdAt
           updatedAt
           owner
@@ -34,10 +47,15 @@ export const listPosts = /* GraphQL */ `
       items {
         id
         title
+        contents
+        image
         createdAt
         updatedAt
         owner
         comments {
+          nextToken
+        }
+        votes {
           nextToken
         }
       }
@@ -56,10 +74,15 @@ export const getComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        image
         createdAt
         updatedAt
         owner
         comments {
+          nextToken
+        }
+        votes {
           nextToken
         }
       }
@@ -83,6 +106,63 @@ export const listComments = /* GraphQL */ `
         post {
           id
           title
+          contents
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getVote = /* GraphQL */ `
+  query GetVote($id: ID!) {
+    getVote(id: $id) {
+      id
+      vote
+      postID
+      createdAt
+      updatedAt
+      post {
+        id
+        title
+        contents
+        image
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+        }
+        votes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listVotes = /* GraphQL */ `
+  query ListVotes(
+    $filter: ModelVoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        vote
+        postID
+        createdAt
+        updatedAt
+        post {
+          id
+          title
+          contents
+          image
           createdAt
           updatedAt
           owner

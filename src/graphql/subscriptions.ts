@@ -7,6 +7,8 @@ export const onCreatePost = /* GraphQL */ `
     onCreatePost {
       id
       title
+      contents
+      image
       createdAt
       updatedAt
       owner
@@ -15,6 +17,17 @@ export const onCreatePost = /* GraphQL */ `
           id
           postID
           content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      votes {
+        items {
+          id
+          vote
+          postID
           createdAt
           updatedAt
           owner
@@ -29,6 +42,8 @@ export const onUpdatePost = /* GraphQL */ `
     onUpdatePost {
       id
       title
+      contents
+      image
       createdAt
       updatedAt
       owner
@@ -43,6 +58,17 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
+      votes {
+        items {
+          id
+          vote
+          postID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -51,6 +77,8 @@ export const onDeletePost = /* GraphQL */ `
     onDeletePost {
       id
       title
+      contents
+      image
       createdAt
       updatedAt
       owner
@@ -59,6 +87,17 @@ export const onDeletePost = /* GraphQL */ `
           id
           postID
           content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      votes {
+        items {
+          id
+          vote
+          postID
           createdAt
           updatedAt
           owner
@@ -79,10 +118,15 @@ export const onCreateComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        image
         createdAt
         updatedAt
         owner
         comments {
+          nextToken
+        }
+        votes {
           nextToken
         }
       }
@@ -101,10 +145,15 @@ export const onUpdateComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        image
         createdAt
         updatedAt
         owner
         comments {
+          nextToken
+        }
+        votes {
           nextToken
         }
       }
@@ -123,10 +172,96 @@ export const onDeleteComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        image
         createdAt
         updatedAt
         owner
         comments {
+          nextToken
+        }
+        votes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateVote = /* GraphQL */ `
+  subscription OnCreateVote {
+    onCreateVote {
+      id
+      vote
+      postID
+      createdAt
+      updatedAt
+      post {
+        id
+        title
+        contents
+        image
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+        }
+        votes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateVote = /* GraphQL */ `
+  subscription OnUpdateVote {
+    onUpdateVote {
+      id
+      vote
+      postID
+      createdAt
+      updatedAt
+      post {
+        id
+        title
+        contents
+        image
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+        }
+        votes {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteVote = /* GraphQL */ `
+  subscription OnDeleteVote {
+    onDeleteVote {
+      id
+      vote
+      postID
+      createdAt
+      updatedAt
+      post {
+        id
+        title
+        contents
+        image
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+        }
+        votes {
           nextToken
         }
       }
