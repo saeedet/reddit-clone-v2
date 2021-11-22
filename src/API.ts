@@ -3,16 +3,20 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreatePostInput = {
+  type: string,
   id?: string | null,
   title: string,
   contents: string,
   image?: string | null,
+  createdAt?: string | null,
 };
 
 export type ModelPostConditionInput = {
+  type?: ModelStringInput | null,
   title?: ModelStringInput | null,
   contents?: ModelStringInput | null,
   image?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelPostConditionInput | null > | null,
   or?: Array< ModelPostConditionInput | null > | null,
   not?: ModelPostConditionInput | null,
@@ -60,6 +64,7 @@ export type ModelSizeInput = {
 
 export type Post = {
   __typename: "Post",
+  type: string,
   id: string,
   title: string,
   contents: string,
@@ -106,10 +111,12 @@ export type Vote = {
 };
 
 export type UpdatePostInput = {
+  type?: string | null,
   id: string,
   title?: string | null,
   contents?: string | null,
   image?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeletePostInput = {
@@ -181,10 +188,12 @@ export type DeleteVoteInput = {
 };
 
 export type ModelPostFilterInput = {
+  type?: ModelStringInput | null,
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
   contents?: ModelStringInput | null,
   image?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelPostFilterInput | null > | null,
   or?: Array< ModelPostFilterInput | null > | null,
   not?: ModelPostFilterInput | null,
@@ -195,6 +204,22 @@ export type ModelPostConnection = {
   items:  Array<Post >,
   nextToken?: string | null,
 };
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelCommentFilterInput = {
   id?: ModelIDInput | null,
@@ -222,6 +247,7 @@ export type CreatePostMutationVariables = {
 export type CreatePostMutation = {
   createPost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -240,6 +266,7 @@ export type CreatePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -263,6 +290,7 @@ export type CreatePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -286,6 +314,7 @@ export type UpdatePostMutationVariables = {
 export type UpdatePostMutation = {
   updatePost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -304,6 +333,7 @@ export type UpdatePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -327,6 +357,7 @@ export type UpdatePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -350,6 +381,7 @@ export type DeletePostMutationVariables = {
 export type DeletePostMutation = {
   deletePost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -368,6 +400,7 @@ export type DeletePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -391,6 +424,7 @@ export type DeletePostMutation = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -421,6 +455,7 @@ export type CreateCommentMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -474,6 +509,7 @@ export type UpdateCommentMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -527,6 +563,7 @@ export type DeleteCommentMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -580,6 +617,7 @@ export type CreateVoteMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -633,6 +671,7 @@ export type UpdateVoteMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -686,6 +725,7 @@ export type DeleteVoteMutation = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -731,6 +771,7 @@ export type GetPostQueryVariables = {
 export type GetPostQuery = {
   getPost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -749,6 +790,7 @@ export type GetPostQuery = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -772,6 +814,7 @@ export type GetPostQuery = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -798,6 +841,60 @@ export type ListPostsQuery = {
     __typename: "ModelPostConnection",
     items:  Array< {
       __typename: "Post",
+      type: string,
+      id: string,
+      title: string,
+      contents: string,
+      image?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        items:  Array< {
+          __typename: "Comment",
+          id: string,
+          postID: string,
+          content: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } >,
+        nextToken?: string | null,
+      } | null,
+      votes?:  {
+        __typename: "ModelVoteConnection",
+        items:  Array< {
+          __typename: "Vote",
+          id: string,
+          vote: string,
+          postID: string,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } >,
+        nextToken?: string | null,
+      } | null,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PostsByDateQueryVariables = {
+  type?: string | null,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PostsByDateQuery = {
+  postsByDate?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -850,6 +947,7 @@ export type GetCommentQuery = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -906,6 +1004,7 @@ export type ListCommentsQuery = {
       updatedAt: string,
       post?:  {
         __typename: "Post",
+        type: string,
         id: string,
         title: string,
         contents: string,
@@ -942,6 +1041,7 @@ export type GetVoteQuery = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -998,6 +1098,7 @@ export type ListVotesQuery = {
       updatedAt: string,
       post?:  {
         __typename: "Post",
+        type: string,
         id: string,
         title: string,
         contents: string,
@@ -1023,6 +1124,7 @@ export type ListVotesQuery = {
 export type OnCreatePostSubscription = {
   onCreatePost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -1041,6 +1143,7 @@ export type OnCreatePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1064,6 +1167,7 @@ export type OnCreatePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1082,6 +1186,7 @@ export type OnCreatePostSubscription = {
 export type OnUpdatePostSubscription = {
   onUpdatePost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -1100,6 +1205,7 @@ export type OnUpdatePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1123,6 +1229,7 @@ export type OnUpdatePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1141,6 +1248,7 @@ export type OnUpdatePostSubscription = {
 export type OnDeletePostSubscription = {
   onDeletePost?:  {
     __typename: "Post",
+    type: string,
     id: string,
     title: string,
     contents: string,
@@ -1159,6 +1267,7 @@ export type OnDeletePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1182,6 +1291,7 @@ export type OnDeletePostSubscription = {
         updatedAt: string,
         post?:  {
           __typename: "Post",
+          type: string,
           id: string,
           title: string,
           contents: string,
@@ -1207,6 +1317,7 @@ export type OnCreateCommentSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -1255,6 +1366,7 @@ export type OnUpdateCommentSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -1303,6 +1415,7 @@ export type OnDeleteCommentSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -1351,6 +1464,7 @@ export type OnCreateVoteSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -1399,6 +1513,7 @@ export type OnUpdateVoteSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,
@@ -1447,6 +1562,7 @@ export type OnDeleteVoteSubscription = {
     updatedAt: string,
     post?:  {
       __typename: "Post",
+      type: string,
       id: string,
       title: string,
       contents: string,

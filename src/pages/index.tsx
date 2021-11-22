@@ -1,23 +1,28 @@
 import API from "@aws-amplify/api";
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { ListPostsQuery, Post } from "../API";
+import { ListPostsQuery, Post, PostsByDateQuery } from "../API";
 import PostPreview from "../components/PostPreview";
-import { useUser } from "../context/AuthContext";
-import { listPosts } from "../graphql/queries";
+import { postsByDate, listPosts } from "../graphql/queries";
 
 export default function Home() {
-  const { user } = useUser();
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const allPosts = (await API.graphql({ query: listPosts })) as {
-        data: ListPostsQuery;
+      const allPosts = (await API.graphql({
+        query: postsByDate,
+        variables: {
+          type: "post",
+          sortDirection: "DESC",
+        },
+      })) as {
+        data: PostsByDateQuery;
         errors: any[];
       };
       if (allPosts.data) {
-        setPosts(allPosts.data.listPosts.items as Post[]);
+        console.log(allPosts.data);
+        setPosts(allPosts.data.postsByDate.items as Post[]);
       } else {
         throw Error("Could not get posts");
       }

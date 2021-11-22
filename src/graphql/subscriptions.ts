@@ -5,6 +5,7 @@
 export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost {
     onCreatePost {
+      type
       id
       title
       contents
@@ -20,6 +21,7 @@ export const onCreatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -40,6 +42,7 @@ export const onCreatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -58,6 +61,7 @@ export const onCreatePost = /* GraphQL */ `
 export const onUpdatePost = /* GraphQL */ `
   subscription OnUpdatePost {
     onUpdatePost {
+      type
       id
       title
       contents
@@ -73,6 +77,7 @@ export const onUpdatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -93,6 +98,7 @@ export const onUpdatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -111,6 +117,7 @@ export const onUpdatePost = /* GraphQL */ `
 export const onDeletePost = /* GraphQL */ `
   subscription OnDeletePost {
     onDeletePost {
+      type
       id
       title
       contents
@@ -126,6 +133,7 @@ export const onDeletePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -146,6 +154,7 @@ export const onDeletePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -170,6 +179,7 @@ export const onCreateComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -213,6 +223,7 @@ export const onUpdateComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -256,6 +267,7 @@ export const onDeleteComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -299,6 +311,7 @@ export const onCreateVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -342,6 +355,7 @@ export const onUpdateVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -385,6 +399,7 @@ export const onDeleteVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents

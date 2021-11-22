@@ -5,6 +5,7 @@
 export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
+      type
       id
       title
       contents
@@ -20,6 +21,7 @@ export const getPost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -40,6 +42,7 @@ export const getPost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -63,6 +66,60 @@ export const listPosts = /* GraphQL */ `
   ) {
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        type
+        id
+        title
+        contents
+        image
+        createdAt
+        updatedAt
+        owner
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const postsByDate = /* GraphQL */ `
+  query PostsByDate(
+    $type: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    postsByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        type
         id
         title
         contents
@@ -106,6 +163,7 @@ export const getComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -154,6 +212,7 @@ export const listComments = /* GraphQL */ `
         createdAt
         updatedAt
         post {
+          type
           id
           title
           contents
@@ -183,6 +242,7 @@ export const getVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -231,6 +291,7 @@ export const listVotes = /* GraphQL */ `
         createdAt
         updatedAt
         post {
+          type
           id
           title
           contents

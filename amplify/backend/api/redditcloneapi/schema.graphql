@@ -9,13 +9,20 @@ type Post
       # Non-signed in users (guests) can read everyones posts as well.
       { allow: public, operations: [read] }
     ]
+  )
+  @key(
+    name: "postsByDate"
+    fields: ["type", "createdAt"]
+    queryField: "postsByDate"
   ) {
+  type: String!
   id: ID!
   title: String!
   contents: String!
   image: String
   votes: [Vote!]! @connection(keyName: "byVote", fields: ["id"])
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  createdAt: String!
 }
 
 type Comment

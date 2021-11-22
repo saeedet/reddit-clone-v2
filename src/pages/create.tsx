@@ -20,6 +20,7 @@ interface Props {}
 export default function Create({}: Props): ReactElement {
   const [file, setFile] = useState<File>();
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -28,9 +29,10 @@ export default function Create({}: Props): ReactElement {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(file);
-    console.log(data);
-
+    // console.log(file);
+    // console.log(data);
+    if (loading) return;
+    setLoading(true);
     // User uploaded file
     if (file) {
       // Send a request to upload to the S3 Bucket.
@@ -42,6 +44,7 @@ export default function Create({}: Props): ReactElement {
         });
 
         const createNewPostInput: CreatePostInput = {
+          type: "post",
           title: data.title,
           contents: data.content,
           image: imagePath,
@@ -53,14 +56,17 @@ export default function Create({}: Props): ReactElement {
           authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
         })) as { data: CreatePostMutation };
 
-        console.log("New post created successfully:", createNewPost);
+        // console.log("New post created successfully:", createNewPost);
 
         router.push(`/post/${createNewPost.data.createPost.id}`);
+        setLoading(false);
       } catch (error) {
         console.error("Error uploading file: ", error);
+        setLoading(false);
       }
     } else {
       const createNewPostWithoutImageInput: CreatePostInput = {
+        type: "post",
         title: data.title,
         contents: data.content,
       };
@@ -72,6 +78,7 @@ export default function Create({}: Props): ReactElement {
       })) as { data: CreatePostMutation };
 
       router.push(`/post/${createNewPostWithoutImage.data.createPost.id}`);
+      setLoading(false);
     }
   };
 
@@ -140,8 +147,9 @@ export default function Create({}: Props): ReactElement {
                 variant="contained"
                 type="submit"
                 style={{ width: "100%" }}
+                disabled={loading}
               >
-                Create Post
+                {loading ? "Uploading..." : "Create Post"}
               </Button>
             </Grid>
           </Grid>

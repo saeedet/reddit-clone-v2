@@ -8,6 +8,7 @@ export const createPost = /* GraphQL */ `
     $condition: ModelPostConditionInput
   ) {
     createPost(input: $input, condition: $condition) {
+      type
       id
       title
       contents
@@ -23,6 +24,7 @@ export const createPost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -43,6 +45,7 @@ export const createPost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -64,6 +67,7 @@ export const updatePost = /* GraphQL */ `
     $condition: ModelPostConditionInput
   ) {
     updatePost(input: $input, condition: $condition) {
+      type
       id
       title
       contents
@@ -79,6 +83,7 @@ export const updatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -99,6 +104,7 @@ export const updatePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -120,6 +126,7 @@ export const deletePost = /* GraphQL */ `
     $condition: ModelPostConditionInput
   ) {
     deletePost(input: $input, condition: $condition) {
+      type
       id
       title
       contents
@@ -135,6 +142,7 @@ export const deletePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -155,6 +163,7 @@ export const deletePost = /* GraphQL */ `
           createdAt
           updatedAt
           post {
+            type
             id
             title
             contents
@@ -182,6 +191,7 @@ export const createComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -228,6 +238,7 @@ export const updateComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -274,6 +285,7 @@ export const deleteComment = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -320,6 +332,7 @@ export const createVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -366,6 +379,7 @@ export const updateVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents
@@ -412,6 +426,7 @@ export const deleteVote = /* GraphQL */ `
       createdAt
       updatedAt
       post {
+        type
         id
         title
         contents

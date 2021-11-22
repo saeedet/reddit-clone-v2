@@ -5,10 +5,22 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../theme";
 import type { AppProps } from "next/app";
 import Amplify from "aws-amplify";
-
+import ProgressBar from "@badrap/bar-of-progress";
 import awsconfig from "../aws-exports";
 import AuthContext from "../context/AuthContext";
 import Header from "../components/Header";
+import Router from "next/router";
+
+const progress = new ProgressBar({
+  size: 4,
+  color: "white",
+  className: "z-50",
+  delay: 100,
+});
+
+Router.events.on("routeChangeStart", progress.start);
+Router.events.on("routeChangeComplete", progress.finish);
+Router.events.on("routeChangeError", progress.finish);
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
