@@ -76,7 +76,7 @@ export default function Login() {
             container
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             spacing={2}
           >
             <Grid item className={classes.fullWidth}>

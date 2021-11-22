@@ -174,7 +174,7 @@ export default function PostPreview({ post }: Props): ReactElement {
       <Grid
         container
         direction="row"
-        justify="flex-start"
+        justifyContent="flex-start"
         alignItems="stretch"
         wrap="nowrap"
         spacing={0}

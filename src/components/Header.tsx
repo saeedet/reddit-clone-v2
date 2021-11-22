@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -43,7 +43,7 @@ export default function Header() {
   const classes = useStyles();
   const router = useRouter();
   const { user } = useUser();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -94,6 +94,7 @@ export default function Header() {
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
+                aria-expanded={open ? "true" : undefined}
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
