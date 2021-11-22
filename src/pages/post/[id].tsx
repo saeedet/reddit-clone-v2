@@ -18,6 +18,7 @@ import { Grid } from "@material-ui/core";
 import { createComment } from "../../graphql/mutations";
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
 import { useState } from "react";
+import { useUser } from "../../context/AuthContext";
 
 interface IFormInput {
   comment: string;
@@ -28,6 +29,7 @@ interface Props {
 }
 
 export default function IndividualPost({ post }: Props): ReactElement {
+  const { user } = useUser();
   const [comments, setComments] = useState<Comment[]>(
     post.comments.items as Comment[]
   );
@@ -38,7 +40,7 @@ export default function IndividualPost({ post }: Props): ReactElement {
     handleSubmit,
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data, e) => {
     console.log(data);
 
     const newCommentInput: CreateCommentInput = {
@@ -53,12 +55,13 @@ export default function IndividualPost({ post }: Props): ReactElement {
     })) as { data: CreateCommentMutation };
 
     setComments([...comments, createNewComment.data.createComment as Comment]);
+    e.target.reset();
   };
 
-  console.log("Got post:", post);
+  // console.log("Got post:", post);
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" style={{ paddingBottom: 32 }}>
       <PostPreview post={post} />
       {/* Start rendering comments */}
       <form
@@ -66,33 +69,38 @@ export default function IndividualPost({ post }: Props): ReactElement {
         autoComplete="off"
         style={{ marginTop: 32, marginBottom: 32 }}
       >
-        <Grid container spacing={2} direction="row" alignItems="center">
-          <Grid item style={{ flexGrow: 1 }}>
-            <TextField
-              variant="outlined"
-              id="comment"
-              label="Add A Comment"
-              type="text"
-              multiline
-              fullWidth
-              error={errors.comment ? true : false}
-              helperText={errors.comment ? errors.comment.message : null}
-              {...register("comment", {
-                required: { value: true, message: "Please enter a username." },
-                maxLength: {
-                  value: 240,
-                  message: "Please enter a comment under 240 characters.",
-                },
-              })}
-              style={{ width: "100%" }}
-            />
+        {user && (
+          <Grid container spacing={2} direction="row" alignItems="center">
+            <Grid item style={{ flexGrow: 1 }}>
+              <TextField
+                variant="outlined"
+                id="comment"
+                label="Add A Comment"
+                type="text"
+                multiline
+                fullWidth
+                error={errors.comment ? true : false}
+                helperText={errors.comment ? errors.comment.message : null}
+                {...register("comment", {
+                  required: {
+                    value: true,
+                    message: "Please enter a comment.",
+                  },
+                  maxLength: {
+                    value: 240,
+                    message: "Please enter a comment under 240 characters.",
+                  },
+                })}
+                style={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="default" type="submit">
+                Add Comment
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Button variant="contained" color="default" type="submit">
-              Add Comment
-            </Button>
-          </Grid>
-        </Grid>
+        )}
       </form>
 
       {/* TODO: Sort comments by createdDate */}

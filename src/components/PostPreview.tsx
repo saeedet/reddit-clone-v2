@@ -1,5 +1,7 @@
 import {
   ButtonBase,
+  CardMedia,
+  Container,
   Grid,
   IconButton,
   Paper,
@@ -12,7 +14,6 @@ import {
   Post,
   UpdateVoteInput,
   UpdateVoteMutation,
-  UpdateVoteMutationVariables,
 } from "../API";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -23,12 +24,39 @@ import { API, Auth, Storage } from "aws-amplify";
 import { createVote, updateVote } from "../graphql/mutations";
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
 import { useUser } from "../context/AuthContext";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 interface Props {
   post: Post;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    contentHolder: {
+      textAlign: "left",
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      width: "425px",
+      marginLeft: "25px",
+      ["@media (max-width:600px)"]: {
+        width: "75vw",
+      },
+      ["@media (max-width:550px)"]: {
+        width: "70vw",
+      },
+      ["@media (max-width:500px)"]: {
+        width: "65vw",
+      },
+      ["@media (max-width:400px)"]: {
+        width: "60vw",
+      },
+    },
+  })
+);
+
 export default function PostPreview({ post }: Props): ReactElement {
+  const classes = useStyles();
   const router = useRouter();
   const { user } = useUser();
   const [postImage, setPostImage] = useState<string | undefined>(undefined);
@@ -67,7 +95,7 @@ export default function PostPreview({ post }: Props): ReactElement {
     async function getImageFromStorage() {
       try {
         const signedURL = await Storage.get(post.image); // get key from Storage.list
-        console.log("Found Image:", signedURL);
+        // console.log("Found Image:", signedURL);
         // @ts-ignore
         setPostImage(signedURL);
       } catch (error) {
@@ -76,7 +104,7 @@ export default function PostPreview({ post }: Props): ReactElement {
     }
 
     getImageFromStorage();
-    console.log(post.votes.items);
+    // console.log(post.votes.items);
   }, []);
 
   const addVote = async (voteType: string) => {
@@ -141,20 +169,20 @@ export default function PostPreview({ post }: Props): ReactElement {
   //   console.log(post);
   //   console.log("Upvotes:", upvotes);
   //   console.log("Downvotes:", downvotes);
-
+  //   router.asPath.slice(1, 5)
   return (
-    <Paper elevation={3}>
+    <Paper elevation={10}>
       <Grid
         container
         direction="row"
         justify="flex-start"
-        alignItems="flex-start"
+        alignItems="stretch"
         wrap="nowrap"
-        spacing={3}
-        style={{ padding: 12, marginTop: 24 }}
+        spacing={0}
+        style={{ padding: 0, marginTop: 24 }}
       >
         {/* Upvote / votes / downvote */}
-        <Grid item style={{ maxWidth: 128 }}>
+        <Grid item style={{ padding: 10, backgroundColor: "#262e3b" }}>
           <Grid container direction="column" alignItems="center">
             <Grid item>
               <IconButton color="inherit" onClick={() => addVote("upvote")}>
@@ -180,42 +208,63 @@ export default function PostPreview({ post }: Props): ReactElement {
         </Grid>
 
         {/* Content Preview */}
-        <Grid item>
-          <ButtonBase onClick={() => router.push(`/post/${post.id}`)}>
-            <Grid container direction="column" alignItems="flex-start">
-              <Grid item>
-                <Typography variant="body1">
+        <ButtonBase
+          onClick={() => router.push(`/post/${post.id}`)}
+          style={{ width: "100%" }}
+        >
+          <Grid item style={{ width: "100%" }}>
+            <Grid
+              container
+              direction="column"
+              alignItems="flex-start"
+              style={{ width: "100%" }}
+            >
+              <Grid item style={{ marginLeft: "25px", marginTop: "10px" }}>
+                <Typography variant="caption" style={{ color: "gray" }}>
                   Posted by <b>{post.owner}</b>{" "}
-                  {formatDatePosted(post.createdAt)} hours ago
+                  {formatDatePosted(post.createdAt)}
                 </Typography>
               </Grid>
-              <Grid item>
-                <Typography variant="h2">{post.title}</Typography>
+              <Grid item style={{ marginRight: "20px" }}>
+                <Typography variant="h3" className={classes.contentHolder}>
+                  {post.title}
+                </Typography>
               </Grid>
               <Grid
                 item
                 style={{
-                  maxHeight: 32,
-                  overflowY: "hidden",
-                  overflowX: "hidden",
+                  maxWidth: "100%",
+                  marginBottom: "10px",
                 }}
               >
-                <Typography variant="body1">{post.contents}</Typography>
+                <Typography variant="body1" className={classes.contentHolder}>
+                  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Dolore recusandae est accusantium distinctio dignissimos sit
+                    aliquam sed quaerat totam delectus sapiente incidunt dolores
+                    natus nisi fugiat facere, eius eveniet sunt! */}
+                  {post.contents}
+                </Typography>
               </Grid>
               {post.image && postImage && (
-                <Grid item>
+                <Grid
+                  item
+                  style={{
+                    width: "100%",
+                    height: "384px",
+                    position: "relative",
+                  }}
+                >
                   <Image
                     alt="postImage"
                     src={postImage}
-                    height={540}
-                    width={980}
-                    layout="intrinsic"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </Grid>
               )}
             </Grid>
-          </ButtonBase>
-        </Grid>
+          </Grid>
+        </ButtonBase>
       </Grid>
     </Paper>
   );

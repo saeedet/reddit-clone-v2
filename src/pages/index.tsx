@@ -28,7 +28,7 @@ export default function Home() {
   console.log(user);
   console.log("Posts", posts);
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm" style={{ paddingBottom: 32 }}>
       {posts?.map((post) => (
         <PostPreview key={post.id} post={post} />
       ))}

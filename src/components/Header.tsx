@@ -72,7 +72,7 @@ export default function Header() {
                   color="inherit"
                 >
                   <Typography
-                    style={{ marginBottom: "2px", marginRight: "2px" }}
+                    style={{ marginBottom: "2px", marginRight: "4px" }}
                   >
                     Post
                   </Typography>
@@ -87,6 +87,15 @@ export default function Header() {
                 color="inherit"
               >
                 <AccountCircle />
+                <Typography
+                  style={{
+                    marginBottom: "2px",
+                    marginLeft: "8px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {user.getUsername()}
+                </Typography>
               </IconButton>
               <Menu
                 id="menu-appbar"
