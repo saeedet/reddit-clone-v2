@@ -80,6 +80,11 @@ export default function PostPreview({ post }: Props): ReactElement {
   }, []);
 
   const addVote = async (voteType: string) => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
     if (existingVote && existingVote != voteType) {
       const updateVoteInput: UpdateVoteInput = {
         id: existingVoteId,

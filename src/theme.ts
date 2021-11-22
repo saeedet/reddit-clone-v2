@@ -86,6 +86,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      root: {
+        "&:hover": {
+          backgroundColor: "rgba(255, 255, 255,.05)",
+        },
+      },
+    },
+    MuiMenuItem: {
+      root: {
+        "&:hover": {
+          backgroundColor: "rgba(255, 255, 255,.05)",
+        },
+      },
+    },
   },
 });
 

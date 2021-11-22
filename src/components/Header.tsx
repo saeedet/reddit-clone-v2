@@ -6,11 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useUser } from "../context/AuthContext";
-import AppleIcon from "@material-ui/icons/Apple";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import AddIcon from "@material-ui/icons/Add";
+import Home from "@material-ui/icons/Home";
 import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,12 +58,12 @@ export default function Header() {
             aria-label="menu"
             onClick={() => router.push(`/`)}
           >
-            <AppleIcon />
+            <Home />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Reddit Clone
           </Typography>
-          {user && (
+          {user ? (
             <div>
               <Tooltip title="Create Post">
                 <IconButton
@@ -71,6 +71,11 @@ export default function Header() {
                   aria-label="create"
                   color="inherit"
                 >
+                  <Typography
+                    style={{ marginBottom: "2px", marginRight: "2px" }}
+                  >
+                    Post
+                  </Typography>
                   <AddIcon />
                 </IconButton>
               </Tooltip>
@@ -101,13 +106,18 @@ export default function Header() {
                 <MenuItem onClick={() => signUserOut()}>Sign Out</MenuItem>
               </Menu>
             </div>
-          )}
-          {!user && (
+          ) : (
             <>
-              <Button variant="outlined" onClick={() => router.push(`/login`)}>
+              <Button
+                variant="outlined"
+                color="primary"
+                style={{ width: "90px", marginRight: "5px" }}
+                onClick={() => router.push(`/login`)}
+              >
                 Login
               </Button>
               <Button
+                style={{ width: "90px" }}
                 variant="contained"
                 color="primary"
                 onClick={() => router.push(`/signup`)}
