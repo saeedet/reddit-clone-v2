@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -45,6 +45,11 @@ export default function Header() {
   const { user } = useUser();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  // Fixing a bug -> menu pop up after loging in
+  useEffect(() => {
+    setAnchorEl(null);
+  }, [user]);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -94,7 +99,6 @@ export default function Header() {
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
-                aria-expanded={open ? "true" : undefined}
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
@@ -113,12 +117,12 @@ export default function Header() {
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
-                anchorOrigin={{
+                transformOrigin={{
                   vertical: "top",
                   horizontal: "right",
                 }}
                 keepMounted
-                transformOrigin={{
+                anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
                 }}
