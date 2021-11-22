@@ -35,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Header />
+          <div style={{ width: "90vw", height: 60 }} />
           <Component {...pageProps} />
         </ThemeProvider>
       </AuthContext>

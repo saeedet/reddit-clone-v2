@@ -16,14 +16,25 @@ import { Tooltip } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      width: "100vw",
       marginBottom: 32,
+      position: "fixed",
+      top: 0,
+      zIndex: 100,
     },
     menuButton: {
       marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
+      ["@media (max-width:400px)"]: {
+        display: "none",
+      },
+    },
+    responsiveHeader: {
+      ["@media (max-width:400px)"]: {
+        display: "none",
+      },
     },
   })
 );
@@ -50,7 +61,7 @@ export default function Header() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="inherit">
-        <Toolbar>
+        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -73,6 +84,7 @@ export default function Header() {
                 >
                   <Typography
                     style={{ marginBottom: "2px", marginRight: "4px" }}
+                    className={classes.responsiveHeader}
                   >
                     Post
                   </Typography>
@@ -116,7 +128,7 @@ export default function Header() {
               </Menu>
             </div>
           ) : (
-            <>
+            <div>
               <Button
                 variant="outlined"
                 color="primary"
@@ -133,7 +145,7 @@ export default function Header() {
               >
                 Sign Up
               </Button>
-            </>
+            </div>
           )}
         </Toolbar>
       </AppBar>
