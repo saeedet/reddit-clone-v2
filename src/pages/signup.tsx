@@ -119,7 +119,7 @@ export default function Signup() {
   // console.log("The value of the user from the hook is:", user);
 
   return (
-    <Grid container alignItems="center" justify="center">
+    <Grid container alignItems="center" justifyContent="center">
       <Paper elevation={20} className={classes.formContainer}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -130,7 +130,7 @@ export default function Signup() {
             container
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             spacing={2}
           >
             {!showCode ? (
