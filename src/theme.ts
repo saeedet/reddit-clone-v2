@@ -1,6 +1,6 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     background: {
       paper: "#1b2330",
@@ -75,6 +75,16 @@ const theme = createMuiTheme({
       fontSize: "1rem",
       lineHeight: 1.75,
       color: "#9CA3AF",
+    },
+  },
+  overrides: {
+    MuiOutlinedInput: {
+      input: {
+        "&:-webkit-autofill": {
+          "-webkit-box-shadow": "0 0 0 100px #131924 inset",
+          "-webkit-text-fill-color": "#fff",
+        },
+      },
     },
   },
 });

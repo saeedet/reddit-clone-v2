@@ -133,7 +133,7 @@ export default function PostPreview({ post }: Props): ReactElement {
     }
   };
 
-  console.log(post);
+  //   console.log(post);
   //   console.log("Upvotes:", upvotes);
   //   console.log("Downvotes:", downvotes);
 
