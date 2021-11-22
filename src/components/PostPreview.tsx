@@ -1,7 +1,5 @@
 import {
   ButtonBase,
-  CardMedia,
-  Container,
   Grid,
   IconButton,
   Paper,
@@ -51,6 +49,11 @@ const useStyles = makeStyles((theme: Theme) =>
       ["@media (max-width:400px)"]: {
         width: "60vw",
       },
+    },
+    postPageContentHolder: {
+      textAlign: "left",
+      marginLeft: "25px",
+      marginRight: "10px",
     },
   })
 );
@@ -166,10 +169,6 @@ export default function PostPreview({ post }: Props): ReactElement {
     }
   };
 
-  //   console.log(post);
-  //   console.log("Upvotes:", upvotes);
-  //   console.log("Downvotes:", downvotes);
-  //   router.asPath.slice(1, 5)
   return (
     <Paper elevation={10}>
       <Grid
@@ -226,7 +225,14 @@ export default function PostPreview({ post }: Props): ReactElement {
                 </Typography>
               </Grid>
               <Grid item style={{ marginRight: "20px" }}>
-                <Typography variant="h3" className={classes.contentHolder}>
+                <Typography
+                  variant="h3"
+                  className={
+                    router.asPath.slice(1, 5) === "post"
+                      ? classes.postPageContentHolder
+                      : classes.contentHolder
+                  }
+                >
                   {post.title}
                 </Typography>
               </Grid>
@@ -237,11 +243,14 @@ export default function PostPreview({ post }: Props): ReactElement {
                   marginBottom: "10px",
                 }}
               >
-                <Typography variant="body1" className={classes.contentHolder}>
-                  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolore recusandae est accusantium distinctio dignissimos sit
-                    aliquam sed quaerat totam delectus sapiente incidunt dolores
-                    natus nisi fugiat facere, eius eveniet sunt! */}
+                <Typography
+                  variant="body1"
+                  className={
+                    router.asPath.slice(1, 5) === "post"
+                      ? classes.postPageContentHolder
+                      : classes.contentHolder
+                  }
+                >
                   {post.contents}
                 </Typography>
               </Grid>
