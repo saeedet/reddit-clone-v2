@@ -17,8 +17,7 @@ export default function PostComment({ comment }: Props): ReactElement {
       <Grid container spacing={1} direction="column">
         <Grid item>
           <Typography variant="body1">
-            <b>{comment.owner}</b> - {formatDatePosted(comment.createdAt)} hours
-            ago
+            <b>{comment.owner}</b> - {formatDatePosted(comment.createdAt)}
           </Typography>
         </Grid>
         <Grid item>
