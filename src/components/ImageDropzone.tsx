@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import { Grid, Typography } from "@material-ui/core";
+import CloudUpload from "@material-ui/icons/CloudUpload";
 
 interface Props {
   file: File;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export default function ImageDropzone({ file, setFile }: Props) {
+  const inputRef = useRef(null);
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: "image/*",
@@ -26,16 +28,21 @@ export default function ImageDropzone({ file, setFile }: Props) {
             borderWidth: 1,
             borderColor: "rgba(255,255,255,0.5)",
             minHeight: 128,
+            cursor: "pointer",
           }}
+          onClick={() => inputRef.current.click()}
         >
           <div
             {...getRootProps({ className: "dropzone" })}
             style={{ padding: 16 }}
           >
-            <input {...getInputProps()} />
-            <Typography variant="body1">
+            <input {...getInputProps()} ref={inputRef} />
+            <Typography variant="body1" style={{ textAlign: "center" }}>
               Drag and drop the image you want to upload for your post.
             </Typography>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              <CloudUpload />
+            </div>
           </div>
         </section>
       ) : (
